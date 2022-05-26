@@ -38,7 +38,7 @@ function saveKoala( newKoala ){ // POST
   // ajax call to server to get koalas
   $.ajax({
     type: 'POST',
-    url: '/koala',
+    url: '/koalas',
     data: newKoala,
   })
   .then(response => {
