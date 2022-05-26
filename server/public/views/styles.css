@@ -1,0 +1,25 @@
+body{
+    background-image: linear-gradient(blue, lightblue);
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    margin: 2%;
+    padding: 2%;
+}
+
+img {
+    margin-left: 60%;
+    height: 300px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px black;
+}
+
+#nameIn, #genderIn, #ageIn, #readyForTransferIn, #notesIn, #addButton {
+    box-shadow: 10px 10px 10px black;
+}
+
+.koalaTable {
+    border-radius: 5px;
+}
+
+tr:nth-child(even) {background: rgb(94, 156, 248)}
+tr:nth-child(odd) {background: rgb(168, 196, 233)}
