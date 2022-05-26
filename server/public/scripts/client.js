@@ -27,13 +27,13 @@ function setupClickListeners() {
   }); 
 }
 
-function getKoalas(){
+function getKoalas(){ // GET
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
   
 } // end getKoalas
 
-function saveKoala( newKoala ){
+function saveKoala( newKoala ){ // POST
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
  
