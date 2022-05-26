@@ -115,14 +115,19 @@ function deleteKoala() {
   console.log("In delete koala", koalaId);
 
   $.ajax({
-    method: "DELETE",
-    url: `/koala/${koalaId}`,
+    
+    method: 'DELETE',
+    url: `/koalas/${koalaId}`,
   })
-    .then(() => {
-      console.log("DELETE /koala Success");
-    })
-    .catch((err) => {
-      alert("Failed to delete koala. Sorry");
-      console.log("DELETE /koala failed:", err);
-    });
+  .then(() => {
+    console.log('DELETE /koalas Success');
+    getKoalas();
+    
+  })
+  .catch((err) => {
+    alert('Failed to delete koala. Sorry')
+    console.log('DELETE /koala failed:', err);
+
+  })
 }
+
