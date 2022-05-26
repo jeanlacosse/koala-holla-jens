@@ -31,20 +31,20 @@ function setupClickListeners() {
   });
 }
 
-function display(response) {
-  for (let i = 0; i < response.length; i++) {
-    let koala = response[i];
-    $("#viewKoalas").append(`
-  <tr data-id=${koala.id}>
-    <td>${koala.name}</td>
-    <td>${koala.age}</td>
-    <td>${koala.ready_to_transfer}</td>
-    <td>${koala.notes}</td>
-  </tr>
-  `);
+  function display(response) {
+    for (let i = 0; i < response.length; i++) {
+      let koala = response[i];
+      $("#viewKoalas").append(`
+    <tr data-id=${koala.id} data-ready-to-transfer=${koala.ready_to_transfer}>
+      <td>${koala.name}</td>
+      <td>${koala.age}</td>
+      <td>${koala.ready_to_transfer}</td>
+      <td>${koala.notes}</td>
+    </tr>
+    `);
+    }
   }
 
-}
 
 function getKoalas() {
   // GET
@@ -79,6 +79,7 @@ function saveKoala(newKoala) {
     .catch((error) => {
       console.log("Error in POST on client side", error);
     });
+}
 }
 
 function transferKoala() {
