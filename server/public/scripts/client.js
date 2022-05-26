@@ -16,11 +16,11 @@ function setupClickListeners() {
     // NOT WORKING YET :(
     // using a test object
     let koalaToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
+      name: $('#nameIn').val(),
+      gender: $('#genderIn').val(),
+      age: $('#ageIn').val(),
+      readyForTransfer: $('#readyForTransferIn').val(),
+      notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
@@ -36,5 +36,16 @@ function getKoalas(){ // GET
 function saveKoala( newKoala ){ // POST
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
- 
+  $.ajax({
+    type: 'POST',
+    url: '/koala',
+    data: newKoala,
+  })
+  .then(response => {
+    console.log('POST from server:', response);
+    getKoalas();
+  })
+  .catch(error => {
+    console.log('Error in POST on client side', error);
+  });
 }
