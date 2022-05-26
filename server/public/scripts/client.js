@@ -44,7 +44,7 @@ function saveKoala( newKoala ){
 function transferKoala() {
      // this is the same path to the tr that the delete used
      let koalaId = $(this).parents('tr').data('data-id');
-     let transfered = $(this).parents('tr').data('data for transfer');
+     let transfered = $(this).parents('tr').data('data-ready_to_transfer');
 
      console.log('in transfer Koala', transfered)
      const updatedKoala = {
