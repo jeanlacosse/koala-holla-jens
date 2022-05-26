@@ -4,7 +4,7 @@ CREATE TABLE koala (
     gender VARCHAR(1),
     age INT,
     ready_to_transfer BOOLEAN DEFAULT FALSE,
-    notes VARCHAR(256),
+    notes VARCHAR(256)
 );
 
 INSERT INTO koala
