@@ -30,7 +30,7 @@ router.put('/:id', (req, res) => {
   `;
 
   const sqlParams = [
-      bookId, // $1
+      koalaId, // $1
       req.body.transfered // $2, 
   ]
 
