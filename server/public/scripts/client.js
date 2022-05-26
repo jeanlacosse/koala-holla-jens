@@ -25,9 +25,10 @@ function setupClickListeners() {
 
     saveKoala(koalaToSend);
   });
-  $(document).on('click', '.delete-btn', deleteKoala)
-  $(document).on('click', '.transferbtn', transferKoala);
-};
+  $(document).on("click", ".delete-btn", deleteKoala);
+  $(document).on("click", ".transferbtn", transferKoala);
+}
+
 
   function display(response) {
 // empty it here
@@ -36,6 +37,7 @@ $('#viewKoalas').empty();
     for (let i = 0; i < response.length; i++) {
       let koala = response[i];
       $("#viewKoalas").append(`
+
     <tr data-id=${koala.id} data-ready-to-transfer=${koala.ready_to_transfer}>
       <td>${koala.name}</td>
       <td>${koala.age}</td>
@@ -45,9 +47,8 @@ $('#viewKoalas').empty();
       <td><button class="delete-btn">Delete</button></td>
     </tr>
     `);
-    }
   }
-
+}
 
 function getKoalas() {
   // GET
@@ -75,58 +76,54 @@ function saveKoala(newKoala) {
     url: "/koalas",
     data: newKoala,
   })
-  .then(response => {
-    console.log('POST from server:', response);
-    getKoalas();
-  })
-  .catch(error => {
-    console.log('Error in POST on client side', error);
-  });
+    .then((response) => {
+      console.log("POST from server:", response);
+      getKoalas();
+    })
+    .catch((error) => {
+      console.log("Error in POST on client side", error);
+    });
 }
-
 
 function transferKoala() {
-     // this is the same path to the tr that the delete used
-     let koalaId = $(this).parents('tr').data('id');
-     let transfered = $(this).parents('tr').data('ready-to-transfer');
+  // this is the same path to the tr that the delete used
+  let koalaId = $(this).parents("tr").data("id");
+  let transfered = $(this).parents("tr").data("ready-to-transfer");
 
-     console.log('in transfer Koala', transfered)
-     const updatedKoala = {
-         transfered: true
-     }
- 
-     $.ajax({
-         method: 'PUT',
-         url: `/koalas/${koalaId}`,
-         data: updatedKoala
-     })
-     .then((res) => {
-         console.log('PUT request working');
-         getKoalas();
-     }).catch((err) => {
-         console.log('error is ', err)
-     })
- 
-     
+  console.log("in transfer Koala", transfered);
+  const updatedKoala = {
+    transfered: true,
+  };
+
+  $.ajax({
+    method: "PUT",
+    url: `/koalas/${koalaId}`,
+    data: updatedKoala,
+  })
+    .then((res) => {
+      console.log("PUT request working");
+      getKoalas();
+    })
+    .catch((err) => {
+      console.log("error is ", err);
+    });
 }
-
 
 // delete koala
 function deleteKoala() {
-  let tr = $(this).parents('tr');
-  let koalaId = tr.data('id');
-  console.log('In delete koala',koalaId);
+  let tr = $(this).parents("tr");
+  let koalaId = tr.data("id");
+  console.log("In delete koala", koalaId);
 
   $.ajax({
-    method: 'DELETE',
+    method: "DELETE",
     url: `/koala/${koalaId}`,
   })
-  .then(() => {
-    console.log('DELETE /koala Success');
-  })
-  .catch((err) => {
-    alert('Failed to delete koala. Sorry')
-    console.log('DELETE /koala failed:', err);
-
-  })
+    .then(() => {
+      console.log("DELETE /koala Success");
+    })
+    .catch((err) => {
+      alert("Failed to delete koala. Sorry");
+      console.log("DELETE /koala failed:", err);
+    });
 }
