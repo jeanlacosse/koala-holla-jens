@@ -15,20 +15,20 @@ function setupClickListeners() {
     // NOT WORKING YET :(
     // using a test object
     let koalaToSend = {
-      name: $('#nameIn').val(),
-      gender: $('#genderIn').val(),
-      age: $('#ageIn').val(),
-      readyForTransfer: $('#readyForTransferIn').val(),
-      notes: $('#notesIn').val(),
+      name: $("#nameIn").val(),
+      gender: $("#genderIn").val(),
+      age: $("#ageIn").val(),
+      readyForTransfer: $("#readyForTransferIn").val(),
+      notes: $("#notesIn").val(),
     };
     // call saveKoala with the new obejct
     saveKoala(koalaToSend);
   });
 }
 
-
-function getKoalas(){ // GET
-  console.log( 'in getKoalas' );
+function getKoalas() {
+  // GET
+  console.log("in getKoalas");
   // ajax call to server to get koalas
   $.ajax({
     type: "GET",
@@ -43,37 +43,34 @@ function getKoalas(){ // GET
     });
 } // end getKoalas
 
-
-function saveKoala( newKoala ){ // POST
-  console.log( 'in saveKoala', newKoala );
+function saveKoala(newKoala) {
+  // POST
+  console.log("in saveKoala", newKoala);
   // ajax call to server to get koalas
   $.ajax({
-    type: 'POST',
-    url: '/koalas',
+    type: "POST",
+    url: "/koalas",
     data: newKoala,
   })
-  .then(response => {
-    console.log('POST from server:', response);
-    getKoalas();
-  })
-  .catch(error => {
-    console.log('Error in POST on client side', error);
-  });
+    .then((response) => {
+      console.log("POST from server:", response);
+      getKoalas();
+    })
+    .catch((error) => {
+      console.log("Error in POST on client side", error);
+    });
 
-function display(response) {
-  for (let i = 0; i < response.length; i++) {
-    let koala = response[i];
-    $("#viewKoalas").append(`
-    <tr data-id=${koala.id}>
+  function display(response) {
+    for (let i = 0; i < response.length; i++) {
+      let koala = response[i];
+      $("#viewKoalas").append(`
+    <tr data-id=${koala.id} data-ready-to-transfer=${koala.ready_to_transfer}>
       <td>${koala.name}</td>
       <td>${koala.age}</td>
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
     </tr>
     `);
+    }
   }
-}
-
-
-
 }
