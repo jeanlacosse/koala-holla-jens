@@ -26,14 +26,8 @@ function setupClickListeners() {
     saveKoala(koalaToSend);
   });
   $(document).on('click', '.delete-btn', deleteKoala)
-}
-
-  }); 
-
   $(document).on('click', '.transferbtn', transferKoala);
-  };
-
-
+};
 
   function display(response) {
     for (let i = 0; i < response.length; i++) {
