@@ -30,6 +30,9 @@ function setupClickListeners() {
 };
 
   function display(response) {
+// empty it here
+$('#viewKoalas').empty();
+
     for (let i = 0; i < response.length; i++) {
       let koala = response[i];
       $("#viewKoalas").append(`
