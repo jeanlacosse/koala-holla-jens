@@ -44,4 +44,10 @@ koalaRouter.post('/', (req,res) => {
 
 // DELETE
 
+koalaRouter.delete('/:couldBeAnything', (req,res ) => {
+    let koalaId = req.params.couldBeAnything
+    console.log('In Delete', koalaId);
+
+})
+
 module.exports = koalaRouter;

@@ -69,6 +69,7 @@ function display(response) {
       <td>${koala.age}</td>
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
+      <td> <button class="delete-btn">Delete</button> </td>
     </tr>
     `);
   }
@@ -76,4 +77,13 @@ function display(response) {
 
 
 
+}
+
+
+// delete koala
+function deleteKoala() {
+  let tr = $(this).parents('tr');
+  let koalaId = tr.data('id');
+  console.log('In delete koala',koalaId);
+  
 }
