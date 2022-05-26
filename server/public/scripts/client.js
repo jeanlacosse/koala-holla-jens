@@ -28,8 +28,8 @@ function setupClickListeners() {
   $(document).on('click', '.transferbtn', transferKoala);
 
     saveKoala(koalaToSend);
-  });
-}
+  };
+
 
   function display(response) {
     for (let i = 0; i < response.length; i++) {
@@ -40,6 +40,7 @@ function setupClickListeners() {
       <td>${koala.age}</td>
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
+      <td><button class="transferbtn">Ready for Transfer</button></td>
     </tr>
     `);
     }
@@ -80,12 +81,12 @@ function saveKoala(newKoala) {
       console.log("Error in POST on client side", error);
     });
 }
-}
+
 
 function transferKoala() {
      // this is the same path to the tr that the delete used
-     let koalaId = $(this).parents('tr').data('data-id');
-     let transfered = $(this).parents('tr').data('data-ready-to-transfer');
+     let koalaId = $(this).parents('tr').data('id');
+     let transfered = $(this).parents('tr').data('ready-to-transfer');
 
      console.log('in transfer Koala', transfered)
      const updatedKoala = {
