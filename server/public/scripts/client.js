@@ -3,7 +3,7 @@ console.log("js");
 $(document).ready(function () {
   console.log("JQ");
   // Establish Click Listeners
-  // setupClickListeners();
+  setupClickListeners();
   // load existing koalas on page load
   getKoalas();
 }); // end doc ready
@@ -22,12 +22,11 @@ function setupClickListeners() {
       notes: $("#notesIn").val(),
     };
     // call saveKoala with the new obejct
+
     saveKoala(koalaToSend);
   });
-
+  $(document).on("click", ".delete-btn", deleteKoala);
   $(document).on("click", ".transferbtn", transferKoala);
-
-  saveKoala(koalaToSend);
 }
 
 function display(response) {
@@ -39,6 +38,8 @@ function display(response) {
       <td>${koala.age}</td>
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
+      <td><button class="transferbtn">Ready for Transfer</button></td>
+      <td><button class="delete-btn">Delete</button></td>
     </tr>
     `);
   }
@@ -81,8 +82,8 @@ function saveKoala(newKoala) {
 
 function transferKoala() {
   // this is the same path to the tr that the delete used
-  let koalaId = $(this).parents("tr").data("data-id");
-  let transfered = $(this).parents("tr").data("data-ready-to-transfer");
+  let koalaId = $(this).parents("tr").data("id");
+  let transfered = $(this).parents("tr").data("ready-to-transfer");
 
   console.log("in transfer Koala", transfered);
   const updatedKoala = {
@@ -100,5 +101,24 @@ function transferKoala() {
     })
     .catch((err) => {
       console.log("error is ", err);
+    });
+}
+
+// delete koala
+function deleteKoala() {
+  let tr = $(this).parents("tr");
+  let koalaId = tr.data("id");
+  console.log("In delete koala", koalaId);
+
+  $.ajax({
+    method: "DELETE",
+    url: `/koala/${koalaId}`,
+  })
+    .then(() => {
+      console.log("DELETE /koala Success");
+    })
+    .catch((err) => {
+      alert("Failed to delete koala. Sorry");
+      console.log("DELETE /koala failed:", err);
     });
 }
