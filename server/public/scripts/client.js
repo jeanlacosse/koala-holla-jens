@@ -24,6 +24,7 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala(koalaToSend);
   });
+  $(document).on('click', '.delete-btn', deleteKoala)
 }
 
 
@@ -85,5 +86,17 @@ function deleteKoala() {
   let tr = $(this).parents('tr');
   let koalaId = tr.data('id');
   console.log('In delete koala',koalaId);
-  
+
+  $.ajax({
+    method: 'DELETE',
+    url: `/koala/${koalaId}`,
+  })
+  .then(() => {
+    console.log('DELETE /koala Success');
+  })
+  .catch((err) => {
+    alert('Failed to delete koala. Sorry')
+    console.log('DELETE /koala failed:', err);
+
+  })
 }
