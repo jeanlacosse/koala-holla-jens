@@ -22,19 +22,18 @@ function setupClickListeners() {
       notes: $("#notesIn").val(),
     };
     // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
-  }); 
-
-  $(document).on('click', '.transferbtn', transferKoala);
-
     saveKoala(koalaToSend);
   });
+
+  $(document).on("click", ".transferbtn", transferKoala);
+
+  saveKoala(koalaToSend);
 }
 
-  function display(response) {
-    for (let i = 0; i < response.length; i++) {
-      let koala = response[i];
-      $("#viewKoalas").append(`
+function display(response) {
+  for (let i = 0; i < response.length; i++) {
+    let koala = response[i];
+    $("#viewKoalas").append(`
     <tr data-id=${koala.id} data-ready-to-transfer=${koala.ready_to_transfer}>
       <td>${koala.name}</td>
       <td>${koala.age}</td>
@@ -42,9 +41,8 @@ function setupClickListeners() {
       <td>${koala.notes}</td>
     </tr>
     `);
-    }
   }
-
+}
 
 function getKoalas() {
   // GET
@@ -80,29 +78,27 @@ function saveKoala(newKoala) {
       console.log("Error in POST on client side", error);
     });
 }
-}
 
 function transferKoala() {
-     // this is the same path to the tr that the delete used
-     let koalaId = $(this).parents('tr').data('data-id');
-     let transfered = $(this).parents('tr').data('data-ready-to-transfer');
+  // this is the same path to the tr that the delete used
+  let koalaId = $(this).parents("tr").data("data-id");
+  let transfered = $(this).parents("tr").data("data-ready-to-transfer");
 
-     console.log('in transfer Koala', transfered)
-     const updatedKoala = {
-         transfered: true
-     }
- 
-     $.ajax({
-         method: 'PUT',
-         url: `/koalas/${koalaId}`,
-         data: updatedKoala
-     })
-     .then((res) => {
-         console.log('PUT request working');
-         getKoalas();
-     }).catch((err) => {
-         console.log('error is ', err)
-     })
- 
-     
+  console.log("in transfer Koala", transfered);
+  const updatedKoala = {
+    transfered: true,
+  };
+
+  $.ajax({
+    method: "PUT",
+    url: `/koalas/${koalaId}`,
+    data: updatedKoala,
+  })
+    .then((res) => {
+      console.log("PUT request working");
+      getKoalas();
+    })
+    .catch((err) => {
+      console.log("error is ", err);
+    });
 }
