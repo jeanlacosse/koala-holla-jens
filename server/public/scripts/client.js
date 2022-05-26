@@ -33,6 +33,7 @@ function display(response) {
   <tr data-id=${koala.id}>
     <td>${koala.name}</td>
     <td>${koala.age}</td>
+    <td>${koala.gender}</td>
     <td>${koala.ready_to_transfer}</td>
     <td>${koala.notes}</td>
   </tr>
