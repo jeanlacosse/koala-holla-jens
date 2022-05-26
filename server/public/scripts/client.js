@@ -1,17 +1,16 @@
-console.log( 'js' );
+console.log("js");
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
+$(document).ready(function () {
+  console.log("JQ");
   // Establish Click Listeners
-  setupClickListeners()
+  // setupClickListeners();
   // load existing koalas on page load
   getKoalas();
-
 }); // end doc ready
 
 function setupClickListeners() {
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
+  $("#addButton").on("click", function () {
+    console.log("in addButton on click");
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
@@ -23,15 +22,27 @@ function setupClickListeners() {
       notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
-  }); 
+    saveKoala(koalaToSend);
+  });
 }
+
 
 function getKoalas(){ // GET
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
-  
+  $.ajax({
+    type: "GET",
+    url: "/koalas",
+  })
+    .then((response) => {
+      console.log(response);
+      display(response);
+    })
+    .catch((err) => {
+      console.log("fuck...", err);
+    });
 } // end getKoalas
+
 
 function saveKoala( newKoala ){ // POST
   console.log( 'in saveKoala', newKoala );
@@ -48,4 +59,21 @@ function saveKoala( newKoala ){ // POST
   .catch(error => {
     console.log('Error in POST on client side', error);
   });
+
+function display(response) {
+  for (let i = 0; i < response.length; i++) {
+    let koala = response[i];
+    $("#viewKoalas").append(`
+    <tr data-id=${koala.id}>
+      <td>${koala.name}</td>
+      <td>${koala.age}</td>
+      <td>${koala.ready_to_transfer}</td>
+      <td>${koala.notes}</td>
+    </tr>
+    `);
+  }
+}
+
+
+
 }
