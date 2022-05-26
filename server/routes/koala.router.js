@@ -70,4 +70,27 @@ koalaRouter.put('/:id', (req, res) => {
 })
 // DELETE
 
+koalaRouter.delete('/:couldBeAnything', (req,res ) => {
+    let koalaId = req.params.couldBeAnything
+    console.log('In Delete', koalaId);
+    const sqlQuery = `
+        DELETE FROM "koala"
+        WHERE "id" = $1;
+        `;
+    const sqlParams = [
+        koalaId,
+    ];
+
+    pool.query(sqlQuery,sqlParams)
+        .then(() => {
+            console.log('It worked');
+            res.sendStatus(204)
+        })
+        .catch((err) => {
+            console.log(`DELETE failed: ${err}`);
+            res.sendStatus(500);
+        })
+
+})
+
 module.exports = koalaRouter;

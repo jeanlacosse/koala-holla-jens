@@ -22,11 +22,17 @@ function setupClickListeners() {
       notes: $("#notesIn").val(),
     };
     // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
+
+    saveKoala(koalaToSend);
+  });
+  $(document).on('click', '.delete-btn', deleteKoala)
+}
+
   }); 
 
   $(document).on('click', '.transferbtn', transferKoala);
   };
+
 
 
   function display(response) {
@@ -39,6 +45,7 @@ function setupClickListeners() {
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
       <td><button class="transferbtn">Ready for Transfer</button></td>
+      <td><button class="delete-btn">Delete</button></td>
     </tr>
     `);
     }
@@ -71,13 +78,13 @@ function saveKoala(newKoala) {
     url: "/koalas",
     data: newKoala,
   })
-    .then((response) => {
-      console.log("POST from server:", response);
-      getKoalas();
-    })
-    .catch((error) => {
-      console.log("Error in POST on client side", error);
-    });
+  .then(response => {
+    console.log('POST from server:', response);
+    getKoalas();
+  })
+  .catch(error => {
+    console.log('Error in POST on client side', error);
+  });
 }
 
 
@@ -104,4 +111,25 @@ function transferKoala() {
      })
  
      
+}
+
+
+// delete koala
+function deleteKoala() {
+  let tr = $(this).parents('tr');
+  let koalaId = tr.data('id');
+  console.log('In delete koala',koalaId);
+
+  $.ajax({
+    method: 'DELETE',
+    url: `/koala/${koalaId}`,
+  })
+  .then(() => {
+    console.log('DELETE /koala Success');
+  })
+  .catch((err) => {
+    alert('Failed to delete koala. Sorry')
+    console.log('DELETE /koala failed:', err);
+
+  })
 }
