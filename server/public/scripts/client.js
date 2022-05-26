@@ -30,17 +30,16 @@ function setupClickListeners() {
 }
 
 
-  function display(response) {
-// empty it here
-$('#viewKoalas').empty();
-
-    for (let i = 0; i < response.length; i++) {
-      let koala = response[i];
-      $("#viewKoalas").append(`
+function display(response) {
+  $("#viewKoalas").empty();
+  for (let i = 0; i < response.length; i++) {
+    let koala = response[i];
+    $("#viewKoalas").append(`
 
     <tr data-id=${koala.id} data-ready-to-transfer=${koala.ready_to_transfer}>
       <td>${koala.name}</td>
       <td>${koala.age}</td>
+      <td>${koala.gender}</td>
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
       <td><button class="transferbtn">Ready for Transfer</button></td>
