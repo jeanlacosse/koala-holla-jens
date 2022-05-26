@@ -3,7 +3,7 @@ console.log("js");
 $(document).ready(function () {
   console.log("JQ");
   // Establish Click Listeners
-  // setupClickListeners();
+  setupClickListeners();
   // load existing koalas on page load
   getKoalas();
 }); // end doc ready
@@ -26,8 +26,6 @@ function setupClickListeners() {
   }); 
 
   $(document).on('click', '.transferbtn', transferKoala);
-
-    saveKoala(koalaToSend);
   };
 
 
