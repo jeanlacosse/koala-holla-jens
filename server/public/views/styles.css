@@ -2,3 +2,18 @@ body{
     background-image: linear-gradient(blue, lightblue);
     font-family: Comic Sans MS, Comic Sans, cursive;
 }
+
+#nameIn, #genderIn, #ageIn, #readyForTransferIn, #notesIn, #addButton {
+    box-shadow: 10px 10px 10px black;
+}
+
+.koalaTable {
+    border-radius: 5px;
+}
+
+img {
+    border-radius: 10px;
+}
+
+tr:nth-child(even) {background: rgb(94, 156, 248)}
+tr:nth-child(odd) {background: rgb(168, 196, 233)}
