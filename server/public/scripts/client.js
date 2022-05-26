@@ -28,10 +28,10 @@ function setupClickListeners() {
   $(document).on('click', '.delete-btn', deleteKoala)
 }
 
-  }); 
+
 
   $(document).on('click', '.transferbtn', transferKoala);
-  };
+ 
 
 
 
@@ -122,10 +122,12 @@ function deleteKoala() {
 
   $.ajax({
     method: 'DELETE',
-    url: `/koala/${koalaId}`,
+    url: `/koalas/${koalaId}`,
   })
   .then(() => {
-    console.log('DELETE /koala Success');
+    console.log('DELETE /koalas Success');
+    getKoalas();
+    
   })
   .catch((err) => {
     alert('Failed to delete koala. Sorry')
