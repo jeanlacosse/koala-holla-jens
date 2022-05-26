@@ -25,6 +25,8 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   }); 
+
+  $(document).on('click', '.transferbtn', transferKoala);
 }
 
 function getKoalas(){
@@ -37,4 +39,29 @@ function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
  
+}
+
+function transferKoala() {
+     // this is the same path to the tr that the delete used
+     let koalaId = $(this).parents('tr').data('data for id');
+     let transfered = $(this).parents('tr').data('data for transfer');
+
+     console.log('in transfer Koala', transfered)
+     const updatedKoala = {
+         transfered: true
+     }
+ 
+     $.ajax({
+         method: 'PUT',
+         url: `/koalas/${koalaId}`,
+         data: updatedKoala
+     })
+     .then((res) => {
+         console.log('PUT request working');
+         getKoalas();
+     }).catch((err) => {
+         console.log('error is ', err)
+     })
+ 
+     
 }
