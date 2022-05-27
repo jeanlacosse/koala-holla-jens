@@ -33,6 +33,7 @@ function setupClickListeners() {
 function display(response) {
   $("#viewKoalas").empty();
   for (let i = 0; i < response.length; i++) {
+    
     let koala = response[i];
     $("#viewKoalas").append(`
 
@@ -48,19 +49,19 @@ function display(response) {
     `);
 
     if (koala.ready_to_transfer === true) {
-      $('.newbtn').append(`
+      $('newbtn').empty();
+      $('.newbtn').last().append(`
       <button class="transferbtn">Ready for Transfer</button>
       `)
     }
     else if (koala.ready_to_transfer === false) {
-      $('.newbtn').append(`
+      $('.newbtn').last().append(`
       <button class="transferbtn">Not Ready for Transfer</button>
       `)
     }
   }
   
 }
-
 
 function getKoalas() {
   // GET
@@ -102,6 +103,7 @@ function transferKoala() {
   // this is the same path to the tr that the delete used
   let koalaId = $(this).parents("tr").data("id");
   let transfered = $(this).parents("tr").data("ready-to-transfer");
+  
 
   console.log("in transfer Koala", transfered);
   const updatedKoala = {
