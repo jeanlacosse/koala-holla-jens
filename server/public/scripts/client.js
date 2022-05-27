@@ -29,7 +29,6 @@ function setupClickListeners() {
   $(document).on("click", ".transferbtn", transferKoala);
 }
 
-
 function display(response) {
   $("#viewKoalas").empty();
   for (let i = 0; i < response.length; i++) {
@@ -114,20 +113,31 @@ function deleteKoala() {
   let koalaId = tr.data("id");
   console.log("In delete koala", koalaId);
 
-  $.ajax({
-    
-    method: 'DELETE',
-    url: `/koalas/${koalaId}`,
-  })
-  .then(() => {
-    console.log('DELETE /koalas Success');
-    getKoalas();
-    
-  })
-  .catch((err) => {
-    alert('Failed to delete koala. Sorry')
-    console.log('DELETE /koala failed:', err);
-
-  })
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, this koala will be no more",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      $.ajax({
+        method: "DELETE",
+        url: `/koalas/${koalaId}`,
+      })
+        .then(() => {
+          console.log("DELETE /koalas Success");
+          getKoalas();
+        })
+        .catch((err) => {
+          alert("Failed to delete koala. Sorry");
+          console.log("DELETE /koala failed:", err);
+        });
+      swal("Koala has been Killed based off your request!", {
+        icon: "success",
+      });
+    } else {
+      swal("No koala meat today");
+    }
+  });
 }
-
