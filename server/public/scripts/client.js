@@ -27,6 +27,7 @@ function setupClickListeners() {
   });
   $(document).on("click", ".delete-btn", deleteKoala);
   $(document).on("click", ".transferbtn", transferKoala);
+  
 }
 
 
@@ -42,12 +43,25 @@ function display(response) {
       <td>${koala.gender}</td>
       <td>${koala.ready_to_transfer}</td>
       <td>${koala.notes}</td>
-      <td><button class="transferbtn">Ready for Transfer</button></td>
+      <td class="newbtn"></td>
       <td><button class="delete-btn">Delete</button></td>
     </tr>
     `);
+
+    if (koala.ready_to_transfer === true) {
+      $('.newbtn').append(`
+      <button class="transferbtn">Ready for Transfer</button>
+      `)
+    }
+    else if (koala.ready_to_transfer === false) {
+      $('.newbtn').append(`
+      <button class="transferbtn">Not Ready for Transfer</button>
+      `)
+    }
   }
+  
 }
+
 
 function getKoalas() {
   // GET
@@ -60,6 +74,7 @@ function getKoalas() {
     .then((response) => {
       console.log(response);
       display(response);
+      // hideButton(response);
     })
     .catch((err) => {
       console.log("fuck...", err);
