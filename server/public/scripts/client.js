@@ -27,7 +27,6 @@ function setupClickListeners() {
   });
   $(document).on("click", ".delete-btn", deleteKoala);
   $(document).on("click", ".transferbtn", transferKoala);
-  
 }
 
 function display(response) {
@@ -48,19 +47,19 @@ function display(response) {
     `);
 
     if (koala.ready_to_transfer === true) {
+      $('.newbtn').empty();
       $('.newbtn').append(`
       <button class="transferbtn">Ready for Transfer</button>
       `)
     }
     else if (koala.ready_to_transfer === false) {
+      $('.newbtn').empty();
       $('.newbtn').append(`
       <button class="transferbtn">Not Ready for Transfer</button>
-      `)
+      `);
     }
   }
-  
 }
-
 
 function getKoalas() {
   // GET
